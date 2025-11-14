@@ -18,10 +18,11 @@ public class JwtFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         String path = request.getRequestURI();
 
-        if (path.startsWith("/api/auth")) {
+        if (path.startsWith("/api/auth") || path.startsWith("/admin")) {
             chain.doFilter(req, res);
             return;
         }
+
 
         String header = request.getHeader("Authorization");
         if (header == null || !header.startsWith("Bearer ")) {

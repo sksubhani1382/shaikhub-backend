@@ -28,14 +28,17 @@ public class SecurityConfig {
                 sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers(
-                        "/api/auth/login",
-                        "/api/auth/register",
-                        "/",
-                        "/error"
-                ).permitAll()
-                .anyRequest().authenticated()
+                    .requestMatchers(
+                            "/api/auth/login",
+                            "/api/auth/register",
+                            "/admin/login",
+                            "/admin/**",
+                            "/",
+                            "/error"
+                    ).permitAll()
+                    .anyRequest().authenticated()
             );
+
 
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
