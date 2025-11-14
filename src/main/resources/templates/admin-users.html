@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin | Users</title>
+</head>
+<body>
+
+<h2>Registered Users</h2>
+
+<a href="/admin/logout">Logout</a>
+
+<table border="1" cellpadding="8">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Mobile</th>
+    </tr>
+
+    <tr th:each="u : ${users}">
+        <td th:text="${u.id}"></td>
+        <td th:text="${u.name}"></td>
+        <td th:text="${u.email}"></td>
+        <td th:text="${u.mobile}"></td>
+    </tr>
+
+</table>
+
+</body>
+</html>
