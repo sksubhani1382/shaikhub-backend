@@ -62,6 +62,19 @@ public class AdminController {
         return "admin-users";
     }
 
+    // -------- Delete User --------
+    @PostMapping("/delete/{id}")
+    public String deleteUser(@PathVariable Long id, HttpSession session) {
+
+        if (session.getAttribute("ADMIN") == null) {
+            return "redirect:/admin/login";
+        }
+
+        userRepo.deleteById(id);
+
+        return "redirect:/admin/users";
+    }
+
     // -------- Logout --------
     @GetMapping("/logout")
     public String logout(HttpSession session) {

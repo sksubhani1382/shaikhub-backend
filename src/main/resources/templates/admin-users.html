@@ -1,20 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Admin | Users</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .logout {
+            float: right;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: darkred;
+        }
+    </style>
 </head>
+
 <body>
 
 <h2>Registered Users</h2>
 
-<a href="/admin/logout">Logout</a>
+<a class="logout" href="/admin/logout">Logout</a>
 
-<table border="1" cellpadding="8">
+<br><br>
+
+<table>
     <tr>
         <th>ID</th>
         <th>Name</th>
         <th>Email</th>
         <th>Mobile</th>
+        <th>Action</th> <!-- New Column -->
     </tr>
 
     <tr th:each="u : ${users}">
@@ -22,6 +65,17 @@
         <td th:text="${u.name}"></td>
         <td th:text="${u.email}"></td>
         <td th:text="${u.mobile}"></td>
+
+        <!-- Delete Button -->
+        <td>
+            <form th:action="@{/admin/delete/{id}(id=${u.id})}"
+                  method="post"
+                  onsubmit="return confirm('Are you sure you want to delete this user?');">
+
+                <button type="submit">Delete</button>
+
+            </form>
+        </td>
     </tr>
 
 </table>
