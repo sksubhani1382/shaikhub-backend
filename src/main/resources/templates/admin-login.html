@@ -1,22 +1,169 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Admin Login</title>
+    <meta charset="UTF-8">
+    <title>Admin Login | ShaikHub</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: #b2f3f3;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Login Box */
+        .login-box {
+            background: white;
+            padding: 30px 35px;
+            width: 350px;
+
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+
+            text-align: center;
+        }
+
+        .login-box h2 {
+            margin-bottom: 25px;
+        }
+
+        /* Input Fields */
+        .login-box input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 15px 0;
+
+            border: 1px solid #ccc;
+            border-radius: 5px;
+
+            font-size: 14px;
+        }
+
+        /* Password Container */
+        .password-container {
+            position: relative;
+        }
+
+        .password-container input {
+            padding-right: 40px;
+        }
+
+        /* Eye Icon */
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+
+            transform: translateY(-50%);
+            cursor: pointer;
+
+            font-size: 18px;
+            user-select: none;
+        }
+
+        /* Button */
+        .login-box button {
+            width: 100%;
+            padding: 10px;
+
+            background: #28a745;
+            color: white;
+
+            border: none;
+            border-radius: 5px;
+
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .login-box button:hover {
+            background: #218838;
+        }
+
+        /* Error */
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+
+    </style>
 </head>
+
 <body>
-<h2>Admin Login</h2>
 
-<form action="/admin/login" method="POST">
-    <label>Username:</label>
-    <input type="text" name="username" required><br><br>
 
-    <label>Password:</label>
-    <input type="password" name="password" required><br><br>
+<div class="login-box">
 
-    <button type="submit">Login</button>
-</form>
+    <h2>Admin Login</h2>
 
-<p style="color:red;">${error}</p>
+    <form action="/admin/login" method="POST">
+
+        <!-- Username -->
+        <input type="text"
+               name="username"
+               placeholder="Username"
+               required>
+
+
+        <!-- Password -->
+        <div class="password-container">
+
+            <input type="password"
+                   name="password"
+                   id="password"
+                   placeholder="Password"
+                   required>
+
+            <span class="toggle-password" id="togglePassword">👁️</span>
+
+        </div>
+
+
+        <!-- Submit -->
+        <button type="submit">Login</button>
+
+    </form>
+
+    <!-- Error Message -->
+    <p class="error">${error}</p>
+
+</div>
+
+
+<!-- Password Toggle Script -->
+<script>
+
+window.addEventListener("load", function () {
+
+    const toggle = document.getElementById("togglePassword");
+    const password = document.getElementById("password");
+
+    if (!toggle || !password) return;
+
+    toggle.addEventListener("click", function () {
+
+        if (password.type === "password") {
+            password.type = "text";
+            this.textContent = "🙈";
+        } else {
+            password.type = "password";
+            this.textContent = "👁️";
+        }
+
+    });
+
+});
+
+</script>
+
 
 </body>
 </html>
